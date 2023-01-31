@@ -13,4 +13,10 @@ module.exports = (app)=>{
 
     //route for getting the category based on the id
     app.get("/ecomm/api/v1/categories/:id" , controller.findOne);
+
+    //route for updating the category 
+    app.put("/ecomm/api/v1/categories/:id", controller.update);
+
+    //route for deleteing the category
+    app.delete("/ecomm/api/v1/categories/:id", controller.delete);
 }
