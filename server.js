@@ -14,13 +14,49 @@ app.use(bodyParser.json());
 
 const db = require("./models");
 
-const Category = db.cateogry;
+const Category = db.category;
+const Product = db.product;
+
+/**
+ * Setup the relationship between the tables
+ */
+
+Category.hasMany(Product); // one to many relationship
+
+
+/**
+ * This function should be executed  at the begining of the app startup
+ */
+function init(){
+    /**
+     * create some initial categories
+     * bulk insert in sequelize
+     */
+    var categories=[
+        {
+            name : "electronics",
+            description : "all electronics related items"
+        },
+        {
+            name : "kitchen items",
+            description : "all kitchen related items"
+        }
+    ]
+
+    Category.bulkCreate(categories).then(()=>{
+        console.log("succesfully added the categories");
+    }).catch(err=>{
+        console.log("error creating the categories", err.message);
+    })
+}
+
 
 /**
  * Create the table
  */
 db.sequelize.sync({force:true}).then(()=>{
     console.log("table dropped and recreated");
+    init();
 }).catch(err=>{
     console.log(err.message);
 })

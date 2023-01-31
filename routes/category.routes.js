@@ -3,10 +3,17 @@
  */
 
 const controller = require("../controllers/category.controller");
+const {requestValidator} = require("../middleware")
+
+
+/**
+ * const {requestValidator} --> this get the hold of content inside the requestValidator which is requestValidator rather than whole object
+ * const requestValidator --> this will get the hold of the whole object which will return by request validator
+ */
 
 module.exports = (app)=>{
     //route for creating new category
-    app.post("/ecomm/api/v1/categories" , controller.create);
+    app.post("/ecomm/api/v1/categories" ,[requestValidator.validateCategoryRequest], controller.create);
 
     //route for getting all the categories
     app.get("/ecomm/api/v1/categories" , controller.findAll);
@@ -15,7 +22,7 @@ module.exports = (app)=>{
     app.get("/ecomm/api/v1/categories/:id" , controller.findOne);
 
     //route for updating the category 
-    app.put("/ecomm/api/v1/categories/:id", controller.update);
+    app.put("/ecomm/api/v1/categories/:id", [requestValidator.validateCategoryRequest],controller.update);
 
     //route for deleteing the category
     app.delete("/ecomm/api/v1/categories/:id", controller.delete);

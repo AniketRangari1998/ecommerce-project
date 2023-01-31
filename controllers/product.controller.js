@@ -14,7 +14,8 @@ exports.create = (req,res)=>{
     const product = {
         name : req.body.name,
         description : req.body.description,
-        cost : req.body.cost
+        cost : req.body.cost,
+        categoryId : req.body.categoryId
     }
 
     Product.create(product).then(product=>{
@@ -114,7 +115,8 @@ exports.update =(req,res) =>{
     const product = {
         name : req.body.name,
         description : req.body.description,
-        cost : req.body.cost
+        cost : req.body.cost,
+        categoryId : req.body.categoryId
     }
 
     const productId = req.params.id;

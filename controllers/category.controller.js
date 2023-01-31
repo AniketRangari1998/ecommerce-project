@@ -8,7 +8,7 @@
  */
 
 const db = require("../models");
-const Category = db.cateogry;
+const Category = db.category;
 
 exports.create = (req,res)=>{
     /**

@@ -1,6 +1,7 @@
 
 const productController = require("../controllers/product.controller");
 
+const {requestValidator} = require("../middleware");
 
 module.exports = (app)=>{
 
@@ -8,7 +9,7 @@ module.exports = (app)=>{
  * api to create the prodcuts
  * POST 127.0.0.1:7000//ecomm/api/v1/products
  */
-app.post("/ecomm/api/v1/products", productController.create);
+app.post("/ecomm/api/v1/products",[requestValidator.validateProductRequest], productController.create);
 
 
 /**
@@ -32,5 +33,5 @@ app.delete("/ecomm/api/v1/products/:id", productController.delete);
 /**
  * api to update the product
  */
-app.put("/ecomm/api/v1/products/:id" , productController.update);
+app.put("/ecomm/api/v1/products/:id" ,[requestValidator.validateProductRequest], productController.update);
 }
