@@ -41,5 +41,6 @@ const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.cateogry = require('./category.model')(sequelize,Sequelize);
+db.product = require('./product.model')(sequelize,Sequelize);
 
 module.exports=db;
