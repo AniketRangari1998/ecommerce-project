@@ -27,3 +27,4 @@ module.exports = (app)=>{
     //route for deleteing the category
     app.delete("/ecomm/api/v1/categories/:id", controller.delete);
 }
+

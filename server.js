@@ -16,6 +16,7 @@ const db = require("./models");
 
 const Category = db.category;
 const Product = db.product;
+const Roles = db.role;
 
 /**
  * Setup the relationship between the tables
@@ -47,7 +48,27 @@ function init(){
         console.log("succesfully added the categories");
     }).catch(err=>{
         console.log("error creating the categories", err.message);
+    });
+
+    /**
+     * Create the roles
+     * 
+     */
+    var roles = [
+        {
+            name : "customer"
+        },
+        {
+            name : "admin"
+        }
+    ]
+
+    Roles.bulkCreate(roles).then(()=>{
+        console.log("successfully added the roles")
+    }).catch(err=>{
+        console.log("error creating the roles "+err.message);
     })
+
 }
 
 
@@ -65,6 +86,7 @@ db.sequelize.sync({force:true}).then(()=>{
 //initialize the routes
 require("./routes/category.routes")(app); //categories routes
 require("./routes/product.routes")(app); //product routes
+require("./routes/auth.route")(app); //auth routes
 
 app.listen(serverConfig.PORT, ()=>{
     console.log("server is started on the port "+ serverConfig.PORT);
