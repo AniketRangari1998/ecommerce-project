@@ -4,7 +4,7 @@
  * 
  */
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');   //for encrypting and decrypting the password
 
 const db = require("../models");
 const User = db.user;
@@ -12,9 +12,12 @@ const Role = db.role;
 
 const Op = db.Sequelize.Op;
 
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");  //for creating the access token
 
 const secretKey = require("../configs/secret.config");
+
+
+
 /**
  * Handler for the signup
  */

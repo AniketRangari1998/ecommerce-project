@@ -61,7 +61,7 @@ const validateProductRequest = (req,res,next)=>{
         category.findByPk(req.body.categoryId).then(category=>{
             if(!category){
                 res.status(400).send({
-                    message : " categoryId is not provided"
+                    message : " categoryId is not available"
                 });
                 return;
             }else{

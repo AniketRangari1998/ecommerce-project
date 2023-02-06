@@ -1,7 +1,7 @@
 
 const productController = require("../controllers/product.controller");
 
-const {requestValidator} = require("../middleware");
+const {requestValidator,authjwt} = require("../middleware");
 
 module.exports = (app)=>{
 
@@ -9,7 +9,7 @@ module.exports = (app)=>{
  * api to create the prodcuts
  * POST 127.0.0.1:7000//ecomm/api/v1/products
  */
-app.post("/ecomm/api/v1/products",[requestValidator.validateProductRequest], productController.create);
+app.post("/ecomm/api/v1/products",[authjwt.verifyToken,authjwt.isAdmin,requestValidator.validateProductRequest], productController.create);
 
 
 /**
@@ -28,10 +28,10 @@ app.get("/ecomm/api/v1/products/:id", productController.findOne);
 /**
  * api to delete the product
  */
-app.delete("/ecomm/api/v1/products/:id", productController.delete);
+app.delete("/ecomm/api/v1/products/:id",[authjwt.verifyToken,authjwt.isAdmin], productController.delete);
 
 /**
  * api to update the product
  */
-app.put("/ecomm/api/v1/products/:id" ,[requestValidator.validateProductRequest], productController.update);
+app.put("/ecomm/api/v1/products/:id" ,[authjwt.verifyToken,authjwt.isAdmin,requestValidator.validateProductRequest], productController.update);
 }
